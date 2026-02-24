@@ -10,4 +10,4 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
-        return self.email
+        return self.email # after we create a model profile
