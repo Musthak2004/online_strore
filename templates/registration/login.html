@@ -1,11 +1,37 @@
+<!-- templates/login.html -->
 {% extends "base.html" %}
-<!--                                 -->
-{% block content %}Log In{% endblock content %}
-<!--                            -->
-{% block title %}
-<h2>Log In</h2>
-<form method="POST">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-{% endblock title %}
+
+{% block title %}Log In - DIMITITA{% endblock %}
+
+{% block content %}
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white shadow-xl rounded-3xl p-10 opacity-0 animate-fade-in-up">
+        <h2 class="text-4xl font-bold text-center text-dimita-dark mb-10">Log In</h2>
+
+        <form method="post" class="space-y-6">
+          {% csrf_token %}
+
+          {% for field in form %}
+            <div>
+              <label class="block text-dimita-gray font-medium mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <p class="mt-1 text-red-600 text-sm">{{ field.errors.0 }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <button type="submit" class="w-full py-4 bg-dimita-red text-white font-bold rounded-full hover:bg-dimita-red-dark transform hover:scale-105 transition-all duration-300 shadow-md">
+            Log In
+          </button>
+        </form>
+
+        <p class="text-center text-dimita-gray mt-8">
+          Don't have an account?
+          <a href="{% url 'signup' %}" class="text-dimita-red font-semibold hover:underline">Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </section>
+{% endblock %}
