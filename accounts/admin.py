@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .forms import CustomUserCreationForm, CustomUserChangeForm, ProfileForm
+from .models import CustomUser, Profile
 
 
 class CustomUserAdmin(UserAdmin):
@@ -28,5 +28,11 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ("user", "city", "district", "postal_code")
+    search_fields = ("user__email", "city", "district")
+    list_filter = ("district", "city")
+
 
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Profile, ProfileAdmin)
